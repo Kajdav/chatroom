@@ -8,11 +8,17 @@ app.service('parseService', function($http, $q){
   //The url for the request needs to be 'https://api.parse.com/1/classes/chat'
   //Also, remember that $http returns a promise. So if you return the whole $http call (return $http(...)), you can then use .then in your controller.
   
-  //postData method here
-
+  this.postData = function(text) {
+    return $http({
+      method: 'POST',
+      data: text,
+      url: 'https://api.parse.com/1/classes/chat'
+    })
+  }
 
   //On the line below create a getData method. This method will retrieve data from the parse backend.
   //The url for the get request should be 'https://api.parse.com/1/classes/chat?order=-createdAt'
+
   //Make sure that in your post request, the format of the data you sent to parse is an object with a key of text and a value of whatever the message was. IE {text: message}
   /*Also, we want to be able to manipulate the data we get back from parse before we pass it back to our controller. The problem is 
   when we're making a request, we don't know when the response will come back. This sound like a perfect use case for a promise. We can 
@@ -26,4 +32,10 @@ app.service('parseService', function($http, $q){
   */
 
   //getData method here
+  this.getData = function() {
+    return $http({
+      method: 'GET',
+      url: 'https://api.parse.com/1/classes/chat?order=-createdAt'
+    })
+  }
 });
